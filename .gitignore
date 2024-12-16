@@ -1,0 +1,51 @@
+# Node modules
+/node_modules/
+
+# Build directories
+/build/
+/dist/
+/server/node_modules
+/client/node_modules
+/server/.env
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+bower_components/
+
+# OS-specific files
+.DS_Store      # macOS
+Thumbs.db      # Windows
+
+# IDE and Editor directories
+.vscode/
+.idea/
+
+# Coverage directory (for Jest, Mocha, etc.)
+/coverage/
+
+# Testing output files
+/test-results/
+
+# .env file for storing sensitive credentials and configurations
+.env.*
+
+# .next (for Next.js apps)
+.next/
+
+# Firebase config (if you're using Firebase for backend)
+.firebase/
+
+# Temporary files
+*.swp
+*~

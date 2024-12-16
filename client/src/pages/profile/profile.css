@@ -1,0 +1,92 @@
+/* General Container */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e6fcf5; /* Light green-blue shade */
+    margin: 0;
+  }
+  
+  /* Profile Card */
+  .profile-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    width: 300px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .profile-title {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Profile Icon */
+  .profile-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .icon-circle {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: #00695c; /* Dark green */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 12px;
+    padding-bottom: 14px;
+  }
+  
+  .user-icon {
+    width: 30px;
+    height: 30px;
+    /* background-color: white; */
+    border-radius: 50%;
+  }
+  
+  /* Input Group */
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .input-icon {
+    margin-right: 10px;
+  }
+  
+  .icon-person,
+  .icon-mail {
+    font-size: 1.2rem;
+    color: #00695c;
+  }
+  
+  .input-field {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    background-color: transparent;
+  }
+  
+  .input-field::placeholder {
+    color: #999;
+  }
+  
+  /* Logout Text */
+  .logout-text {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  

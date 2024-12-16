@@ -1,0 +1,10 @@
+
+td{
+
+    border-right: 1px solid #ccc;
+    padding: 30px;
+
+}
+tr td:last-child {
+    border-right: none;
+  }

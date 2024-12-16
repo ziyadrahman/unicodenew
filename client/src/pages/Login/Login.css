@@ -1,0 +1,51 @@
+.form {
+  width: 400px;
+  height: 450px;
+  background-color: #016E6B;
+  padding: 20px;
+  border-radius: 20px;
+  color: white;
+}
+
+.input::placeholder {
+  color: white;
+}
+
+.header {
+  left: 200px;
+}
+
+@media (max-width: 768px) {
+
+  /* Adjust max-width based on your requirements */
+  .header {
+    left: 0;
+  }
+}
+
+
+.cendiv {
+  display: flex;
+  justify-content: center;
+  /* Horizontal center */
+  align-items: center;
+  /* Vertical center */
+  height: 100vh;
+  /* Ensure the container takes up full viewport height */
+}
+
+.input {
+  width: 200px;
+  /* Increased the width for better visibility */
+  background-color: #016E6B;
+  /* Light blue background */
+  padding: 5px;
+  /* Adds some padding for better appearance */
+  border-radius: 5px;
+  height: 50px;
+  /* Optional: Adds rounded corners */
+  border: 1px solid #ccc;
+  border: 2px solid white;
+
+  /* Optional: Adds border */
+}

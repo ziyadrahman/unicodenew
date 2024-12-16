@@ -1,0 +1,83 @@
+select,
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+    tr {
+        border-bottom: 1px solid #ccc;
+        /* background-color: whitesmoke; */
+      }
+      
+  
+
+button {
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px; /* Spacing between items */
+  }
+  
+  .row > div {
+    flex: 1; /* Ensure equal width for each column */
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px; /* Space between label and select */
+    font-weight: bold; /* Optional: makes the label bold */
+  }
+  
+  select {
+    width: 100%; /* Full width of the parent div */
+    padding: 8px; /* Internal padding for better appearance */
+    font-size: 14px; /* Consistent font size */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light gray border */
+    box-sizing: border-box; /* Includes padding in the width calculation */
+  }
+  .buttons {
+    display: flex; /* Enables flexbox layout */
+    justify-content: space-between; /* Places buttons at opposite ends */
+    align-items: center; /* Aligns buttons vertically (optional) */
+    margin-top: 20px; /* Adds space above the button row */
+  }
+  
+  .btn {
+    padding: 10px 20px; /* Internal padding for button size */
+    font-size: 16px; /* Font size for button text */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Removes default border */
+    cursor: pointer; /* Shows pointer on hover */
+  }
+  
+  .btn-left {
+    background-color: #E63946; /* Left button color (Cancel) */
+    color: white; /* Text color */
+  }
+  
+  .btn-right {
+    background-color: #046A4E; /* Right button color (Submit) */
+    color: white; /* Text color */
+    color: whitesmoke;
+  }
+  
+  .btn:hover {
+    opacity: 0.9; /* Slightly reduces opacity on hover */
+  }
+    
+  h6{
+    font-weight: 600;
+    font-size: small;
+  }
