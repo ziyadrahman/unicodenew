@@ -8,6 +8,7 @@ import Login from './pages/Login/Login';
 import { useEffect, useState } from 'react';
 import baseUrl from './api/api';
 import Profile from './pages/profile/Profile';
+import AddBranchesItems from './pages/Branchs/AddBranhesItems';
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
       <Route path='/nav' element={user?.userName ? <Nav /> : <Navigate to='/login' />} />
       <Route path='/profile' element={user?.userName ? <Profile /> : <Navigate to='/login' />} />
       <Route path='/login' element={!user?.userName ? <Login /> : <Navigate to={'/'} />} />
+      <Route path='/branches' element={user?.userName ? <AddBranchesItems /> : <Navigate to={'/login'} />} />
     </Routes>
 
   );

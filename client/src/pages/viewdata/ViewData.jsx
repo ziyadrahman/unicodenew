@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Nav from '../../components/Nav';
+import baseUrl from '../../api/api';
 
 const ViewData = () => {
   const [products, setProducts] = useState([]); // Complete product list
@@ -8,7 +9,7 @@ const ViewData = () => {
   const rowsPerPage = 20; // Number of rows per page
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/fetch-data')
+    fetch(`${baseUrl.baseUrl}api/fetch-data`)
       .then(res => res.json())
       .then(data => {
         setProducts(data.data || []); // Set fetched data

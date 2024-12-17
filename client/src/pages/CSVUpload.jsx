@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import baseUrl from '../api/api';
 
 const CSVUpload = () => {
   const [file, setFile] = useState(null);
@@ -28,7 +29,7 @@ const CSVUpload = () => {
     setUploadResult(null);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/upload-csv', formData, {
+      const response = await axios.post(`${baseUrl.baseUrl}api/upload-csv`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -94,15 +95,15 @@ const CSVUpload = () => {
       <br />
       <h1>Upload CSV File</h1>
       <br /><br />
-      <input 
-        type="file" 
-        onChange={handleFileChange} 
-        style={{width:'30%'}} 
+      <input
+        type="file"
+        onChange={handleFileChange}
+        style={{ width: '30%' }}
         accept=".csv"
       /><br /><br />
-      <button 
-        className='btn btn-success' 
-        onClick={handleUpload} 
+      <button
+        className='btn btn-success'
+        onClick={handleUpload}
         disabled={isUploading}
       >
         {isUploading ? 'Uploading...' : 'Upload'}
@@ -118,8 +119,8 @@ const CSVUpload = () => {
 
           {uploadResult.failedRecordsCount > 0 && (
             <div style={{ marginTop: '10px' }}>
-              <button 
-                onClick={downloadFailedRecords} 
+              <button
+                onClick={downloadFailedRecords}
                 style={{
                   padding: '10px 20px',
                   backgroundColor: '#dc3545',

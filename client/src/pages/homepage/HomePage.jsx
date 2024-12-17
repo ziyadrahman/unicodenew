@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Nav from "../../components/Nav";
 import baseUrl from "../../api/api";
 
@@ -108,7 +108,7 @@ const HomePage = () => {
     });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/upload', payload, {
+      const response = await axios.post(`${baseUrl.baseUrl}api/upload`, payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -182,20 +182,24 @@ const HomePage = () => {
           <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
         </svg>
       </div> */}
+      <Link to={'/branches'}>
 
-      <button
-        style={{
-          backgroundColor: "#fff",
-          color: "#046A4E",
-          border: "1px solid white",
-          borderRadius: "5px",
-          padding: "8px 15px",
-          marginBottom: "20px",
-          cursor: "pointer",
-        }}
-      >
-        + Add Branches & Items
-      </button>
+        <button
+          style={{
+            backgroundColor: "#fff",
+            color: "#046A4E",
+            border: "1px solid white",
+            borderRadius: "5px",
+            padding: "8px 15px",
+            marginBottom: "20px",
+            cursor: "pointer",
+          }}
+        >
+          + Add Branches & Items
+        </button>
+
+      </Link>
+
 
       <table
         style={{
