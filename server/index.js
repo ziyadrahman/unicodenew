@@ -117,6 +117,7 @@ app.use('/api/user', UserRouter)
 
 
 
+
 /**
  * @route   GET /api/fetch-data
  * @desc    Fetch all records from MongoDB and return grouped data

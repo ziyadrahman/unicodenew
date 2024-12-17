@@ -5,7 +5,7 @@ const ViewData = () => {
   const [products, setProducts] = useState([]); // Complete product list
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1); // Current page number
-  const rowsPerPage = 1000; // Number of rows per page
+  const rowsPerPage = 20; // Number of rows per page
 
   useEffect(() => {
     fetch('http://localhost:5000/api/fetch-data')
@@ -45,26 +45,26 @@ const ViewData = () => {
       <Nav /> <br />
       {/* Header Buttons */}
       <div style={{ marginTop: '20px' }}>
-        <button 
-          style={{ 
-            backgroundColor: '#004D40', 
+        <button
+          style={{
+            backgroundColor: '#004D40',
             color: '#fff',
-            border: '1px solid green', 
-            padding: '10px 20px', 
-            cursor: 'pointer', 
-            marginRight: '10px' 
+            border: '1px solid green',
+            padding: '10px 20px',
+            cursor: 'pointer',
+            marginRight: '10px'
           }}
           onClick={() => window.location.href = '/'}
         >
           Back to add Item
         </button>
-        <button 
-          style={{ 
-            backgroundColor: '#004D40', 
-            color: '#fff', 
-            border: 'none', 
-            padding: '10px 20px', 
-            cursor: 'pointer' 
+        <button
+          style={{
+            backgroundColor: '#004D40',
+            color: '#fff',
+            border: 'none',
+            padding: '10px 20px',
+            cursor: 'pointer'
           }}
           onClick={() => window.location.href = '/'}
         >

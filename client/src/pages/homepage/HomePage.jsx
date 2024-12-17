@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Nav from "../../components/Nav";
+import baseUrl from "../../api/api";
 
 const HomePage = () => {
   const [currentItem, setCurrentItem] = useState({
@@ -20,7 +21,6 @@ const HomePage = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     let newValue = value;
@@ -126,6 +126,27 @@ const HomePage = () => {
       setError(error.response?.data?.error || 'An error occurred while submitting data');
     }
   };
+
+  const [fetchData, setFetchData] = useState([]); // State to store the fetched data
+
+  useEffect(() => {
+    // Fetch function inside useEffect
+    const fetchDataFromAPI = async () => {
+      try {
+        const response = await fetch(baseUrl.baseUrl + "api/fetchAllData");
+        const data = await response.json();
+        setFetchData(data.data); // Assuming the data is in 'data' field based on your server response
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchDataFromAPI();
+    console.log(fetchData);
+    // Call the fetch function when the component mounts
+  }, []);
+  const branches = fetchData?.length > 0 ? fetchData[0].subCategories : [];
+  console.log(branches);
 
   return (
     <div
@@ -317,7 +338,7 @@ const HomePage = () => {
                     width: "100%",
                     padding: "8px",
                     border: "1.5px solid gray",
-                    backgroundColor: 'whitesmoke',
+                    backgroundColor: "whitesmoke",
                     borderRadius: "5px",
                   }}
                   name="branchName"
@@ -326,27 +347,16 @@ const HomePage = () => {
                   required
                 >
                   <option value="">Select Branch Name</option>
-                  <option value="GROOMS Kottayam">GROOMS Kottayam</option>
-                  <option value="GROOMS Edappally">GROOMS Edappally</option>
-                  <option value="GROOMS Perumbavoor">GROOMS Perumbavoor</option>
-                  <option value="GROOMS Thrissur">GROOMS Thrissur</option>
-                  <option value="GROOMS Palakkad">GROOMS Palakkad</option>
-                  <option value="GROOMS Chavakkad">GROOMS Chavakkad</option>
-                  <option value="GROOMS Edappal">GROOMS Edappal</option>
-                  <option value="GROOMS Vatakara">GROOMS Vatakara</option>
-                  <option value="GROOMS Perinthalmanna">GROOMS Perinthalmanna</option>
-                  <option value="GROOMS Manjery">GROOMS Manjery</option>
-                  <option value="GROOMS Kottakkal">GROOMS Kottakkal</option>
-                  <option value="GROOMS Kozhikode">GROOMS Kozhikode</option>
-                  <option value="GROOMS Kannur">GROOMS Kannur</option>
-                  <option value="GROOMS Kalpetta">GROOMS Kalpetta</option>
-                  <option value="GROOMS Trivandrum">GROOMS Trivandrum</option>
-                  <option value="Zoucci Edappal">Zoucci Edappal</option>
-                  <option value="Zoucci Kottakkal">Zoucci Kottakkal</option>
-                  <option value="Zoucci Perinthalmanna">Zoucci Perinthalmanna</option>
-                  <option value="Zoucci Edappally">Zoucci Edappally</option>
-                  <option value="WAREHOUSE">WAREHOUSE</option>
+
+                  {fetchData[0]?.branches?.map((item) => {
+                    return (
+                      <option key={item._id} value={item.place}>
+                        {item.place}
+                      </option>
+                    );
+                  })}
                 </select>
+
               </div>
 
               <div
@@ -374,8 +384,13 @@ const HomePage = () => {
                     }}
                   >
                     <option value="">Select Category</option>
-                    <option value="P">Premium</option>
-                    <option value="LX">Luxury</option>
+                    {fetchData[0]?.categories?.map((item) => {
+                      return (
+                        <option key={item._id} value={item.code}>
+                          {item.name}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
 
@@ -395,14 +410,13 @@ const HomePage = () => {
                     }}
                   >
                     <option value="">Select Sub-Category</option>
-                    <option value="IW">IW</option>
-                    <option value="B">B</option>
-                    <option value="JP">JP</option>
-                    <option value="3P">3P</option>
-                    <option value="NJ">NJ</option>
-                    <option value="2P">2P</option>
-                    <option value="KD">KD</option>
-                    <option value="KU">KU</option>
+                    {fetchData[0]?.subCategories?.map((item) => {
+                      return (
+                        <option key={item._id} value={item.code}>
+                          {item.name}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
 
@@ -422,10 +436,13 @@ const HomePage = () => {
                     }}
                   >
                     <option value="">Select Item Code</option>
-                    <option value="WC">WC</option>
-                    <option value="T">T</option>
-                    <option value="BZ">BZ</option>
-                    <option value="K">K</option>
+                    {fetchData[0]?.items?.map((item) => {
+                      return (
+                        <option key={item._id} value={item.code}>
+                          {item.name}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               </div>
