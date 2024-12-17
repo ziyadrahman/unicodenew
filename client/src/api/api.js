@@ -1,4 +1,4 @@
 const baseUrl = {
-    baseUrl: 'http://localhost:5000/'
+    baseUrl: 'https://unicode-tz2r.onrender.com/'
 }
 export default baseUrl
