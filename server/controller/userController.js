@@ -79,12 +79,12 @@ export const userLogin = async (req, res) => {
         );
 
         // Set token in a cookie
-        res.cookie('jwt', token, {
-            maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
-            httpOnly: true,
-            sameSite: 'strict',
-            secure: process.env.NODE_ENV !== 'development',
-        });
+    res.cookie('token', token, {
+  httpOnly: true, 
+  secure: true, // Set to true in production to enforce HTTPS
+  sameSite: 'none', // Allows cross-origin requests
+});
+
 
         // Send response
         res.status(200).json({
