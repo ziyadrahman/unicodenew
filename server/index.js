@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ['https://unicode-mu.vercel.app', 'http://localhost:3000'],
+    origin: ['https://unicode-mu.vercel.app', 'http://localhost:3000','https://unicode-two.vercel.app'],
     credentials: true,
   })
 );
