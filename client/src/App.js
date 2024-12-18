@@ -22,23 +22,29 @@ function App() {
 
   useEffect(() => {
     const checkUser = async () => {
-      try {
-        const response = await fetch(baseUrl.baseUrl + "api/user/verifyjwt", {
-          method: "GET",
-          credentials: "include",
-        });
+      const storedUser = JSON.parse(localStorage.getItem("usercode"));
 
-        const data = await response.json();
+      if (storedUser) {
+        return setUser(storedUser)
+      } else {
+        try {
+          const response = await fetch(baseUrl.baseUrl + "api/user/verifyjwt", {
+            method: "GET",
+            credentials: "include",
+          });
 
-        if (response.ok) {
-          console.log("User authenticated:", data.user);
-          setUser(data?.user)
-          localStorage.setItem("usercode", JSON.stringify(data.user));
-        } else {
-          console.error(data.message);
+          const data = await response.json();
+
+          if (response.ok) {
+            console.log("User authenticated:", data.user);
+            setUser(data?.user)
+            localStorage.setItem("usercode", JSON.stringify(data.user));
+          } else {
+            console.error(data.message);
+          }
+        } catch (error) {
+          console.error("Error validating token:", error.message);
         }
-      } catch (error) {
-        console.error("Error validating token:", error.message);
       }
     };
 
