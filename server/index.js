@@ -18,12 +18,21 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser()); // To parse JSON requests
+const allowedOrigins = ['http://localhost:3000', 'https://unicode-1.onrender.com'];
+
 app.use(
   cors({
-    origin: '*',
-    credentials: true
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
   })
 );
+
 
 
 // Configure Multer for File Uploads
