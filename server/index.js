@@ -20,10 +20,13 @@ app.use(express.json());
 app.use(cookieParser()); // To parse JSON requests
 app.use(
   cors({
-    origin: 'https://unicode-mu.vercel.app',
+    origin: ['https://unicode-mu.vercel.app', 'http://localhost:3000'],
     credentials: true
+
+    // Allow cookies and other credentials
   })
 );
+
 
 
 // Configure Multer for File Uploads
