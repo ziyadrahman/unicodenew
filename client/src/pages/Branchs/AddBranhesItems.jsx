@@ -3,6 +3,7 @@ import './addbranchesitems.css';
 import Nav from '../../components/Nav';
 import { Link } from 'react-router-dom';
 import baseUrl from '../../api/api';
+import { FaPenNib } from "react-icons/fa";
 
 const AddBranchesItems = () => {
 
@@ -19,7 +20,6 @@ const AddBranchesItems = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
 
 
 
@@ -69,6 +69,38 @@ const AddBranchesItems = () => {
   };
 
   const [isModalOpen3, setIsModalOpen3] = useState(false);
+
+
+
+
+
+
+  const [isModalOpens1, setIsModalOpens1] = useState(false);
+
+  const [branchs1, setBranchs1] = useState({
+    place: ""
+  })
+  const openModals1 = () => {
+    setIsModalOpens1(true);
+  };
+
+  const closeModals1 = () => {
+    setIsModalOpens1(false);
+  };
+
+  const HandleBranchs1 = () => {
+    try {
+
+    } catch (error) {
+      throw new Error(error)
+
+    }
+  }
+
+
+
+
+
 
 
 
@@ -239,8 +271,82 @@ const AddBranchesItems = () => {
 
             {fetchData[0]?.branches?.map((item) => {
               return (
-                <tr><td key={item._id} style={{ padding: '10px', textAlign: 'center', }}>{item.place}</td></tr>
+                <>
+                  <tr><td key={item._id} style={{ padding: '10px', textAlign: 'center', }}>{item.place} <div onClick={openModals1} style={{ float: 'right', cursor: 'pointer' }}><FaPenNib /></div></td></tr>
+                  <div>
+                    <table>
 
+                    </table>
+
+                    {/* Modal */}
+                    {isModalOpens1 && (
+                      <div
+                        style={{
+                          position: "fixed",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          backgroundColor: "white",
+                          padding: "20px",
+                          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                          zIndex: 1000,
+                          borderRadius: "8px",
+                        }}
+                      >
+                        <h2>Add Item</h2>
+
+                        <p>Here you can add your new item details.</p>
+                        <input type="text" style={{ marginBottom: '10px' }} value={branch.place} onChange={(e) => setBranchs1({ ...branchs1, place: e.target.value })} />
+                        <>
+                          <div style={{ display: "flex", justifyContent: 'space-between' }}>
+                            <button
+                              style={{
+                                padding: "8px 12px",
+                                backgroundColor: "#f44336",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "5px",
+                                cursor: "pointer",
+                              }}
+                              onClick={closeModals1}
+                            >
+                              Close
+                            </button>
+                            <button
+                              style={{
+                                padding: "8px 12px",
+                                backgroundColor: "green",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "5px",
+                                cursor: "pointer",
+                              }}
+                              onClick={HandleBranchs1}
+                            >
+                              ADD
+                            </button>
+                          </div>
+                        </>
+                      </div>
+                    )}
+
+                    {/* Overlay */}
+                    {isModalOpen && (
+                      <div
+                        style={{
+                          position: "fixed",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          backgroundColor: "rgba(0, 0, 0, 0.5)",
+                          zIndex: 999,
+                        }}
+                        onClick={closeModals1}
+                      ></div>
+                    )}
+                  </div>
+                </>
               );
             })}
             <div>
@@ -676,8 +782,6 @@ const AddBranchesItems = () => {
                 ></div>
               )}
             </div>
-
-
           </tbody>
         </table>
         <table border="1" style={{ borderCollapse: 'collapse', width: '10%', alignContent: 'center', height: '80px', padding: '10px' }}>
@@ -694,93 +798,8 @@ const AddBranchesItems = () => {
 
               );
             })}
-
-
-
           </tbody>
         </table>
-
-        {/* <div className="table-section">
-
-          <table style={{ alignContent: 'center' }}>
-            <thead style={{ border: 'none' }}>
-              <tr>
-                <th style={{ padding: '10px', textAlign: 'center' }}>Sub-Category</th>
-                <th style={{ padding: '10px', textAlign: 'center' }}>Code</th>
-                <th style={{ padding: '10px', textAlign: 'center' }}>Category</th>
-                <th style={{ padding: '10px', textAlign: 'center' }}>Code</th>
-                <th style={{ padding: '10px', textAlign: 'center' }}>Item</th>
-                <th style={{ padding: '10px', textAlign: 'center' }}>Code</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Indo Western</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>IW</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Premium</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>P</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Waist</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>WC</td>
-              </tr>
-              <tr>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Bangala</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>B</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Non Premium</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>NP</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Pant</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>T</td>
-              </tr>
-              <tr>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Jodhpuri</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>JP</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Luxury</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>LX</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Blazer</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>BZ</td>
-              </tr>
-              <tr>
-                <td style={{ padding: '10px', textAlign: 'center' }}>3 Pcs Suit</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>3P</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Kurta</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>K</td>
-              </tr>
-              <tr>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Nehru Jacket</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>NJ</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-              </tr>
-              <tr>
-                <td style={{ padding: '10px', textAlign: 'center' }}>2 Pcs Suit</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>2P</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-              </tr>
-              <tr>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Kids Suit</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>KD</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-              </tr>
-              <tr>
-                <td style={{ padding: '10px', textAlign: 'center' }}>Kurtha</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}>KU</td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-                <td style={{ padding: '10px', textAlign: 'center' }}></td>
-              </tr>
-            </tbody>
-          </table>
-        </div> */}
       </div>
     </div>
   );

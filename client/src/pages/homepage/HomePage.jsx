@@ -84,9 +84,13 @@ const HomePage = () => {
     setSavedItems((prevItems) => prevItems.filter((_, i) => i !== index));
   };
 
+  const [loading, setLoading] = useState(false)
+
   const handleSubmitAll = async () => {
+    setLoading(true)
     setError(null);
     if (savedItems.length === 0) {
+      setLoading(false)
       setError('No items to submit. Please add items first.');
       return;
     }
@@ -115,6 +119,7 @@ const HomePage = () => {
       });
 
       alert('Data submitted successfully!');
+      setLoading(false)
       console.log('Server Response:', response.data);
 
       setSavedItems([]);
@@ -122,6 +127,7 @@ const HomePage = () => {
       // Navigate to the products table view after successful submission
       // navigate('/view-table');
     } catch (error) {
+      setLoading(false)
       console.error('Error submitting data:', error.response || error.message);
       setError(error.response?.data?.error || 'An error occurred while submitting data');
     }
@@ -290,19 +296,37 @@ const HomePage = () => {
         >
           View Saved Data
         </button>
-        <button
-          style={{
-            backgroundColor: "#046A4E",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            padding: "10px 20px",
-            cursor: "pointer",
-          }}
-          onClick={handleSubmitAll}
-        >
-          Submit
-        </button>
+        {
+          !loading ? <button
+            style={{
+              backgroundColor: "#046A4E",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              padding: "10px 20px",
+              cursor: "pointer",
+            }}
+            onClick={handleSubmitAll}
+          >
+            Submit
+          </button> : <h4
+            style={{
+              backgroundColor: "#046A4E",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              padding: "10px 20px",
+
+            }}
+
+          >
+            <button class="btn " type="button" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Loading...
+            </button>
+          </h4>
+        }
+
       </div>
 
       {error && (

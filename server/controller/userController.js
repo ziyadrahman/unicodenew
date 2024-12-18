@@ -78,13 +78,12 @@ export const userLogin = async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        // Set token in a cookie
-        res.cookie('jwt', token, {
-            maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
+        res.cookie('token', token, {
             httpOnly: true,
-            sameSite: 'strict',
-            secure: process.env.NODE_ENV !== 'development',
+            secure: true, // Set to true in production to enforce HTTPS
+            sameSite: 'none', // Allows cross-origin requests
         });
+
 
         // Send response
         res.status(200).json({
@@ -122,7 +121,7 @@ export const userLogout = (req, res) => {
 
 export const verifyJWT = async (req, res) => {
     try {
-        const token = req.cookies.jwt;
+        const token = req.cookies.token;
 
         if (!token) {
             return res.status(401).json({ message: "No token provided" });
