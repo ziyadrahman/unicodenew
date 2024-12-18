@@ -78,12 +78,13 @@ export const userLogin = async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        res.cookie('token', token, {
+        // Set token in a cookie
+        res.cookie('jwt', token, {
+            maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
             httpOnly: true,
-            secure: true, // Set to true in production to enforce HTTPS
-            sameSite: 'none', // Allows cross-origin requests
+            sameSite: 'strict',
+            secure: process.env.NODE_ENV !== 'development',
         });
-
 
         // Send response
         res.status(200).json({
