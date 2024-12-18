@@ -24,13 +24,13 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: ['https://unicodenew.vercel.app', 'http://localhost:3000','https://unicode-two.vercel.app'],
-    credentials: true,
-  })
-);
+const allowedOrigins = ['https://unicodenew.vercel.app'];
 
+app.use(cors({
+  origin: allowedOrigins, // Allow requests from this URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 // Ensure the 'uploads' directory exists
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory);
