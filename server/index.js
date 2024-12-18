@@ -20,8 +20,8 @@ app.use(express.json());
 app.use(cookieParser()); // To parse JSON requests
 app.use(
   cors({
-    origin: ['http://localhost:3000','https://unicode-1.onrender.com'], // Array of allowed origins
-    credentials: true, // Allow cookies or other credentials
+    origin: '*',
+    credentials: true
   })
 );
 
