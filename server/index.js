@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser()); // To parse JSON requests
 app.use(
   cors({
-    origin: '*',
+    origin: 'https://unicode-mu.vercel.app',
     credentials: true
   })
 );

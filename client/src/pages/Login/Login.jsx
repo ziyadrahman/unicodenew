@@ -36,7 +36,7 @@ const Login = () => {
             if (response.message === "Login successful") {
                 alert("Login success");
                 // Optionally store user or token in localStorage
-                localStorage.setItem("user", JSON.stringify(response.user));
+                localStorage.setItem("usercode", JSON.stringify(response.user));
                 window.location.reload();
             } else {
                 alert(response.message);

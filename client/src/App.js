@@ -25,19 +25,27 @@ function App() {
       const storedUser = JSON.parse(localStorage.getItem("usercode"));
 
       if (storedUser) {
-        return setUser(storedUser)
+        setUser(storedUser);
       } else {
         try {
-          const response = await fetch(baseUrl.baseUrl + "api/user/verifyjwt", {
+          const token = localStorage.getItem("token"); // Retrieve the token from localStorage or cookies
+          if (!token) {
+            console.error("No token found");
+            return;
+          }
+
+          const response = await fetch(`${baseUrl.baseUrl}api/user/verifyjwt`, {
             method: "GET",
-            credentials: "include",
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the Bearer token in the header
+            },
           });
 
           const data = await response.json();
 
           if (response.ok) {
             console.log("User authenticated:", data.user);
-            setUser(data?.user)
+            setUser(data.user);
             localStorage.setItem("usercode", JSON.stringify(data.user));
           } else {
             console.error(data.message);
@@ -49,7 +57,8 @@ function App() {
     };
 
     checkUser();
-  }, []);
+  }, []); // Run once on component mount
+
 
   return (
 

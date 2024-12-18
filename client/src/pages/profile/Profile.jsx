@@ -1,46 +1,4 @@
-// import React from 'react';
-// import './profile.css'; // Import the CSS file
 
-// const Profile = () => {
-//   return (
-//     <div className="container">
-//       <div className="header">
-
-//         <h3>Product Unique Code Generation</h3> <br /> <br />
-//         <button className="back-button">← Back</button>
-//       </div>
-//       <div className="card-container">
-//         <div className="profile-card">
-//           <div className="profile-icon">
-//             {/* <i className="icon">👤</i> */}
-
-//           </div>
-//           <h2 className="title">Profile</h2>
-//           <div className="field">
-//             {/* <span className="label">Employee ID</span> */}
-//             <input
-//             type="text"
-//             id="employeeId"
-//             placeholder="Employee ID"
-//             className="input-field"
-//           />
-//           </div>
-//           <div className="field">
-//           <input
-//             type="email"
-//             id="email"
-//             placeholder="employee@gmail.com"
-//             className="input-field"
-//           />
-//           </div>
-//           <button className="logout">LOGOUT</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Profile;
 import React, { useEffect, useState } from "react";
 import "./profile.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -80,7 +38,7 @@ function Profile() {
         document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
         // Set user to null in localStorage
-        localStorage.setItem("user", JSON.stringify(null));
+        localStorage.setItem("usercode", JSON.stringify(null));
 
         // Optionally, redirect to the login page or refresh the page
         window.location.reload();  // Refresh the page
