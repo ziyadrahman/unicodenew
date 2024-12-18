@@ -1,28 +1,33 @@
-
 import React, { useEffect, useState } from "react";
 import "./profile.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import baseUrl from "../../api/api";
-
-
 
 function Profile() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate(); // Hook to navigate programmatically
 
   useEffect(() => {
     const storedUser = localStorage.getItem('usercode');
     if (storedUser) {
-      setUser(JSON.parse(storedUser)); // Update the state
+      setUser(JSON.parse(storedUser)); // Update the state with user info from localStorage
+    } else {
+      setUser(null); // If no user data in localStorage, set user state to null
     }
   }, []); // Empty dependency array to run only once, similar to componentDidMount
 
-  useEffect(() => {
-    console.log(user); // Logs the user after it has been updated
-  }, [user]); // This will run whenever the 'user' state changes
+  const Handlelogout = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
 
-  const Handlelogout = async () => {
-    alert("Logout success")
+    // Clear user data from localStorage
+    localStorage.setItem("usercode", JSON.stringify(null));
+    setUser(null); // Explicitly reset the state
+    window.location.reload();
+
+    // Clear JWT cookie (client-side)
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
     try {
       // Send the logout request to the server
       const response = await fetch(baseUrl.baseUrl + "api/user/logout", {
@@ -34,20 +39,13 @@ function Profile() {
 
       // Handle success response
       if (res.message === "Logout successful") {
-        // Clear JWT cookie (client-side)
-        document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-        // Set user to null in localStorage
-        localStorage.setItem("usercode", JSON.stringify(null));
-
-        // Optionally, redirect to the login page or refresh the page
-        window.location.reload();  // Refresh the page
+        // Optionally, redirect to the login page after logout
+        navigate("/login"); // Assuming you have a login route
       } else {
         alert(res.message);
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Logout failed. Please try again.");
     }
   };
 
@@ -57,7 +55,6 @@ function Profile() {
       <div className="profile-container">
         <div className="header">
           <div style={{ alignItems: "center", position: 'absolute', top: '30px', left: '30px', display: 'flex' }}>
-
             <img
               src='/assets/rootments logo 2.jpg'
               alt="Logo"
@@ -69,50 +66,59 @@ function Profile() {
           </div>
           <Link to={'/'}>
             <button className="btn btn-light text-success" style={{ position: 'absolute', top: '100px', left: '20px' }}>back</button>
-
-
           </Link>
         </div>
         <div className="main" style={{ display: 'flex', flexDirection: 'column' }}>
           <h2 className="profile-title" style={{ display: 'flex', justifyContent: 'center' }}>Profile</h2>
 
           <div className="profile-card">
-
             <div className="profile-icon">
               <div className="icon-circle">
                 <i
                   className="fas fa-user user-icon"
-                  style={{ fontSize: "50px", color: 'white', alignItems: 'center' }} // Custom size here
+                  style={{ fontSize: "50px", color: 'white', alignItems: 'center' }}
                 ></i>
               </div>
             </div>
-            <div className="input-group">
-              <label htmlFor="employeeId" className="input-icon">
-                <i className="fa-regular fa-user"
-                  style={{ color: '#016E5B', fontSize: '20px' }}
-                ></i>  </label>
-              <input
-                type="text"
-                value={user?._id}
-                id="employeeId"
-                placeholder="Employee ID"
-                className="input-field"
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="email" className="input-icon">
-                <i className="fa-regular fa-envelope"
-                  style={{ color: '#016E5B', fontSize: '20px' }}
-                ></i>  </label>
-              <input
-                value={user?.email}
-                type="email"
-                id="email"
-                placeholder="employee@gmail.com"
-                className="input-field"
-              />
-            </div>
-            <button type="submit" className="btn" style={{ color: 'red' }} >LOGOUT</button>
+
+            {user ? (
+              <>
+                <div className="input-group">
+                  <label htmlFor="employeeId" className="input-icon">
+                    <i className="fa-regular fa-user"
+                      style={{ color: '#016E5B', fontSize: '20px' }}
+                    ></i>
+                  </label>
+                  <input
+                    type="text"
+                    value={user?._id}
+                    id="employeeId"
+                    placeholder="Employee ID"
+                    className="input-field"
+                    readOnly
+                  />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="email" className="input-icon">
+                    <i className="fa-regular fa-envelope"
+                      style={{ color: '#016E5B', fontSize: '20px' }}
+                    ></i>
+                  </label>
+                  <input
+                    value={user?.email}
+                    type="email"
+                    id="email"
+                    placeholder="employee@gmail.com"
+                    className="input-field"
+                    readOnly
+                  />
+                </div>
+              </>
+            ) : (
+              <p>No user data available</p> // Display this if there's no user data
+            )}
+
+            <button type="submit" className="btn" style={{ color: 'red' }}>LOGOUT</button>
           </div>
         </div>
       </div>

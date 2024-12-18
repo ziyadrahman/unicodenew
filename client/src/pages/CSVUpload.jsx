@@ -1,8 +1,7 @@
-// csvupload.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import baseUrl from '../api/api';
+import { ClipLoader } from 'react-spinners'; // Importing the spinner
 
 const CSVUpload = () => {
   const [file, setFile] = useState(null);
@@ -40,7 +39,7 @@ const CSVUpload = () => {
     } catch (error) {
       console.error('Error uploading file:', error.response || error.message);
       const errorMessage = error.response?.data?.error || 'Error uploading file.';
-      setMessage(errorMessage);
+      setMessage(`Upload failed: ${errorMessage}`);
     } finally {
       setIsUploading(false);
     }
@@ -106,7 +105,7 @@ const CSVUpload = () => {
         onClick={handleUpload}
         disabled={isUploading}
       >
-        {isUploading ? 'Uploading...' : 'Upload'}
+        {isUploading ? <ClipLoader size={20} color="#fff" /> : 'Upload'}
       </button>
       <p>{message}</p>
 
@@ -117,7 +116,7 @@ const CSVUpload = () => {
           <p>Successfully Saved Groups: {uploadResult.savedRecordsCount}</p>
           <p>Failed Records: {uploadResult.failedRecordsCount}</p>
 
-          {uploadResult.failedRecordsCount > 0 && (
+          {uploadResult.failedRecordsCount > 0 ? (
             <div style={{ marginTop: '10px' }}>
               <button
                 onClick={downloadFailedRecords}
@@ -163,6 +162,8 @@ const CSVUpload = () => {
                 </tbody>
               </table>
             </div>
+          ) : (
+            <p>No failed records.</p>
           )}
         </div>
       )}

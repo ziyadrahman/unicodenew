@@ -184,6 +184,10 @@ const HomePage = () => {
 
       </Link>
 
+      <Link to={'/csv-upload'}>
+        <h1>csv</h1>
+      </Link>
+
 
       <table
         style={{
