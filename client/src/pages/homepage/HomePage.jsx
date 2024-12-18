@@ -80,6 +80,7 @@ const HomePage = () => {
     handleCloseModal();
   };
 
+
   const handleRemoveItem = (index) => {
     setSavedItems((prevItems) => prevItems.filter((_, i) => i !== index));
   };
