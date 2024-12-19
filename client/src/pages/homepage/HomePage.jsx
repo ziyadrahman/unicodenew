@@ -184,9 +184,9 @@ const HomePage = () => {
 
       </Link>
 
-      <Link to={'/csv-upload'}>
+{/*       <Link to={'/csv-upload'}>
         <h1>csv</h1>
-      </Link>
+      </Link> */}
 
 
       <table
