@@ -3,7 +3,7 @@ import { DatasUplaod, FetchAllData, FetchData, UpdateBranch, UpdateCategory, Upd
 const router = express.Router()
 
 
-router.post('/upload-csv', DatasUplaod).post('/add_branch', UpdateBranch).post('/add_category', UpdateCategory).post('/add_subcategory', UpdateSubCategory).post('/add_item', UpdateItem)
+router.post('/upload', DatasUplaod).post('/add_branch', UpdateBranch).post('/add_category', UpdateCategory).post('/add_subcategory', UpdateSubCategory).post('/add_item', UpdateItem)
 router.get('/fetchAllData', FetchAllData).get('/fetch-data', FetchData)
 
 export default router
