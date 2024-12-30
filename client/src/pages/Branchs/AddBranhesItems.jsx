@@ -794,7 +794,7 @@ const AddBranchesItems = () => {
 
             {fetchData[0]?.items?.map((item) => {
               return (
-                <tr><td key={item._id} style={{ padding: '10px', textAlign: 'center', }}>{item.name}</td></tr>
+                <tr><td key={item._id} style={{ padding: '10px', textAlign: 'center', }}>{item.code}</td></tr>
 
               );
             })}
