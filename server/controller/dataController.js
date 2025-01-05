@@ -26,36 +26,12 @@ export const DatasUplaod = async (req, res) => {
 
 export const FetchData = async (req, res) => {
     try {
-        // Fetch documents sorted by createdAt in descending order (newest first)
-        const data = await CodeData.find().sort({ createdAt: -1 }); // -1 means descending order
-
-        // Group data by unique product details
-        const groupedData = data.reduce((acc, item) => {
-            const key = `${item.branchName}-${item.category}-${item.subCategory}-${item.half}-${item.year}-${item.itemCode}-${item.size}`;
-            if (!acc[key]) {
-                acc[key] = {
-                    branchName: item.branchName,
-                    category: item.category,
-                    subCategory: item.subCategory,
-                    half: item.half,
-                    year: item.year,
-                    itemCode: item.itemCode,
-                    size: item.size,
-                    quantity: item.quantity,
-                    codes: [...item.codes],
-                };
-            } else {
-                acc[key].codes.push(...item.codes);
-            }
-
-            return acc;
-        }, {});
-
-        const groupedArray = Object.values(groupedData);
+        // Fetch all data sorted by createdAt in descending order (newest first)
+        const data = await CodeData.find().sort({ createdAt: -1 }); // No grouping, fetch all individually
 
         res.status(200).json({
-            total: groupedArray.length,
-            data: groupedArray,
+            total: data.length, // Total number of records fetched
+            data: data,         // Send all records without merging
         });
     } catch (error) {
         console.error('Error fetching data:', error);
