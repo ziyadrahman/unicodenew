@@ -563,7 +563,7 @@ const AddBranchesItems = () => {
         <table border="1" style={{ borderCollapse: 'collapse', width: '20%', alignContent: 'center', height: '80px', padding: '10px' }}>
           <thead>
             <tr>
-              <th style={{ textAlign: 'center' }}>Categorie</th>
+              <th style={{ textAlign: 'center' }}>Category</th>
             </tr>
           </thead>
           <tbody >
