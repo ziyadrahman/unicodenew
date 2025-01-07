@@ -137,7 +137,7 @@ const ViewData = () => {
             </table>
 
             <div style={{ padding: '10px', background: '#f1f1f1', height: '100%', overflowY: 'scroll' }}>
-              <h3>All Codes on Current Page:</h3>
+              <h5>All Codes </h5>
               <button
                 onClick={() => handleCopy(allCodesOnPage)}
                 style={{
